@@ -1,12 +1,19 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fireLogout } from '../actions/auth'
 
-const Header = () => (
+const Header = ({ fireLogout }) => (
   <header>
     <h1>Expensify</h1>
     <NavLink to="/" activeClassName="is-active" exact={true}>Dashboard</NavLink>
     <NavLink to="/create" activeClassName="is-active">Create Expense</NavLink>
+    <button onClick={fireLogout}>Logout</button>
   </header>
 );
 
-export default Header;
+const mapDispatchToProps = (dispatch) => ({
+  fireLogout: () => dispatch(fireLogout())
+})
+
+export default connect(undefined, mapDispatchToProps)(Header);
